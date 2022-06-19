@@ -1,0 +1,18 @@
+{
+  "rows_y":216,
+  "cols_x":300,
+  "depth_z":108,
+  "distribution":"uniform",
+  "perc_of_scatterers":80,
+  "sound_speed_c0_m_per_s":1540,
+  "density_rho0_kg_per_m3":1000,
+  "phantom_format":"k_wave",
+  "structures": [
+    { "type":"sphere", "center_xyz":[ 180, 80, 50 ], "radius":42, "scat_gain":5 },
+    { "type":"sphere", "center_xyz":[ 210, 160, 50 ], "radius":35, "scat_gain":5 },
+    { "type":"sphere", "center_xyz":[ 105, 110, 50 ], "radius":31, "scat_gain":0 },
+    { "type":"circle", "center_xy":[ 70, 40 ], "radius":8, "scat_gain":3 },
+    { "type":"circle", "center_xy":[ 70, 60 ], "radius":8, "scat_gain":0 },
+    { "type":"circle", "center_xy":[ 70, 80 ], "radius":8, "scat_gain":3 }
+  ]
+}

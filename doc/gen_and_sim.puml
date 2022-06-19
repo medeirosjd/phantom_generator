@@ -1,0 +1,11 @@
+@startuml
+
+start
+repeat;
+#White:Find configuration file;
+#White:Call phantom generator with current file;
+#White:Run ultrasound simulation;
+repeat while (All files processed?) is (No) not (Yes)
+end
+
+@enduml

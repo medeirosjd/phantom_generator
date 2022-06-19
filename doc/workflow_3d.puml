@@ -1,0 +1,13 @@
+@startuml
+
+start
+#White:Load and parse configuration;
+repeat;
+#White:Add structures;
+#White:Define scatterers positions;
+#White:Set amplitude, density map and sound speed map;
+repeat while (All slices generated?) is (No) not (Yes)
+#White:Save final 3-D .mat file;
+end
+
+@enduml

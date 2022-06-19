@@ -1,0 +1,10 @@
+@startuml
+
+start
+#White:Load and parse configuration;
+#White:Load input image;
+#White:Define scatterers positions and amplitude;
+#White:Save to disk;
+end
+
+@enduml

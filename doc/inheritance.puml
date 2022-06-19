@@ -1,0 +1,31 @@
+@startuml
+
+class Structure3d #fff {
+}
+
+class Structure #fff {
+}
+
+class Sphere #fff {
+}
+
+class Circle #fff {
+}
+
+class Polygon #fff {
+}
+
+class Rectangle #fff {
+}
+
+class SinglePoint #fff {
+}
+
+Structure3d <|-- Sphere
+Structure <|-- Sphere
+Structure <|-- Circle
+Structure <|-- Polygon
+Structure <|-- Rectangle
+Structure <|-- SinglePoint
+
+@enduml

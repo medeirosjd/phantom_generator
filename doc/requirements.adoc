@@ -1,0 +1,109 @@
+= Phantom Generator Requirements
+J Medeiros
+v0.1, 2022-02-07
+:toc:
+:Description: Phantom generator is an utility to generate a set of structures (phantom) that can be used as input to ultrasound simulators
+
+{Description}
+
+=== Req 1 - Compatibility
+
+*Description*: The program SHALL generate outputs compatible with effective scatterers method, and k-Wave simulations
+
+*Rationale*: This is related to the main goal of the application, create phantoms that can be used later for simulation. The different toolboxes expect different inputs, that is why compatibility is explicitly mentioned. Specially, this also means that it should be possible to generate 2-D (effective scatterers) and 3-D phantoms (k-Wave)
+
+*Acceptance criteria*: The generated phantoms can be loaded in MATLAB and used in simulations with the two mentioned toolboxes
+
+---
+
+=== Req 2 - Phantom definition
+
+*Description*: The user SHALL be able to configure the properties of the desired phantom. The following items should be configurable:
+
+** Size of the phantom, either directly with the number of points in each dimension or the physical dimension and resolution in each dimension
+** Type, size and position of the structures
+** Amplitude of the scatterers in the phantom
+** Type of statistical distribution used for the scatterers
+
+*Rationale*: It is highly desired that the user can specify the phantom properties in a file (e.g. json file), this allows easy configuration and possibility automating the configuration generation
+
+*Acceptance criteria*: All the items from the description can be used in the configuration
+
+==== Req 2.1 - Structures
+
+*Description*: Is SHALL be possible to add the following structures:
+
+* 2-D structures
+** Polygon
+** Circle
+** Point
+** Ellipse
+** Rectangle
+
+* 3-D structures
+** The 2-D structures continuously repeated in each desired slice of the 3-D phantom
+** Sphere
+
+*Rationale*: The 2-D structures allow to generate many different types of structures, giving great flexibility for the user. For 3-D structures, it is added a sphere and the other structures are replicated in the 3-D slices. It is anticipated that allowing free 3-D configuration increases the complexity considerably
+
+*Acceptance criteria*: All defined structures can be added according to the configuration file
+
+---
+
+=== Req 3 - Output format
+
+*Description*: The program SHALL save the output in .mat, as a grey-level image and as text
+
+*Rationale*: The .mat file is intended to be used directly by MATLAB, without having to define the data type. The images are only for reference, so the user can immediately check if the desired phantom was generated. The text output allows to analyze the values in different applications and programming languages. For 3-D phantoms, it is acceptable to have one file per slice
+
+*Acceptance criteria*: The outputs contain the desired phantom; the .mat file can be directly loaded in MATLAB and the text file matches the .mat file
+
+---
+
+=== Req 4 - Run mode
+
+*Description*: It SHALL be possible to run the program by command line
+
+*Rationale*: It is desired that the application can be executed in batch mode from a command line script, therefore it is convenient that the application runs from command line
+
+*Acceptance criteria*: The user can run the application in command line and get the desired outputs
+
+---
+
+=== Req 5 - Execution configuration
+
+*Description*: The user SHALL be able to configure the execution of the program
+
+*Rationale*: This refers to the configuration of the execution, not the configuration of the phantom. For example, output path, verbose mode, etc.
+
+*Acceptance criteria*: At least the output path, the output type and the input phantom definition file are configurable
+
+---
+
+=== Req 6 - Resources monitoring
+
+*Description*: The application SHALL inform the user about the used RAM memory and disk space
+
+*Rationale*: It is possible that the user requests a phantom that requires more system resources (RAM memory and disk space) than those available. So showing this information allows the user to stop the execution
+
+*Acceptance criteria*: The amount of used memory and disk are periodically informed to the user
+
+---
+
+=== Req 7 - Error messages
+
+*Description*: The application SHALL show an error message if the execution is stopped
+
+*Rationale*: The error message allows the user to know what is the problem and to fix it
+
+*Acceptance criteria*: An error is displayed when the execution is halted
+
+---
+
+=== Req 8 - Operating system
+
+*Description*: It SHALL be possible to run the application in Windows (10) and Linux operating systems
+
+*Rationale*: This gives flexibility for users
+
+*Acceptance criteria*: It is possible to generate phantoms and save the outputs both in Windows and Linux

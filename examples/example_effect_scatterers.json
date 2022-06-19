@@ -1,0 +1,13 @@
+{
+  "rows_y":512,
+  "cols_x":512,
+  "distribution":"rayleigh",
+  "perc_of_scatterers":60,
+  "phantom_format":"effec_scatterers",
+  "structures": [
+    { "type":"circle", "center_xy":[ 300, 300 ], "radius":50, "scat_gain":3 },
+    { "type":"rectangle", "top_left_corner_xy":[ 50, 60 ], "length_x":20, "length_y":30, "scat_gain":4 },
+    { "type":"free_polygon", "vertices_xy":[ [0, 0], [100, 0], [100, 100] ], "scat_gain":0 },
+    { "type":"points", "coordinates_xy":[ [150, 110], [85, 85] ], "scat_gain":2 }
+  ]
+ } 
