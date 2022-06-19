@@ -1,13 +1,23 @@
 {
-  "rows_y":512,
-  "cols_x":512,
-  "distribution":"rayleigh",
-  "perc_of_scatterers":60,
+  "rows_y":256,
+  "cols_x":384,
+  "distribution":"uniform",
+  "perc_of_scatterers":30,
   "phantom_format":"effec_scatterers",
   "structures": [
-    { "type":"circle", "center_xy":[ 300, 300 ], "radius":50, "scat_gain":3 },
-    { "type":"rectangle", "top_left_corner_xy":[ 50, 60 ], "length_x":20, "length_y":30, "scat_gain":4 },
-    { "type":"free_polygon", "vertices_xy":[ [0, 0], [100, 0], [100, 100] ], "scat_gain":0 },
-    { "type":"points", "coordinates_xy":[ [150, 110], [85, 85] ], "scat_gain":2 }
+    { "type":"circle", "center_xy":[ 30, 30 ], "radius":15, "scat_gain":3 },
+    { "type":"circle", "center_xy":[ 30, 70 ], "radius":15, "scat_gain":3 },
+    { "type":"circle", "center_xy":[ 30, 110 ], "radius":15, "scat_gain":3 },
+    { "type":"circle", "center_xy":[ 30, 150 ], "radius":15, "scat_gain":3 },
+    { "type":"circle", "center_xy":[ 30, 190 ], "radius":15, "scat_gain":3 },
+    { "type":"circle", "center_xy":[ 70, 30 ], "radius":15, "scat_gain":3 },
+    { "type":"circle", "center_xy":[ 110, 30 ], "radius":15, "scat_gain":3 },
+    { "type":"circle", "center_xy":[ 150, 30 ], "radius":15, "scat_gain":3 },
+    { "type":"circle", "center_xy":[ 190, 30 ], "radius":15, "scat_gain":3 },
+    { "type":"circle", "center_xy":[ 120, 120 ], "radius":30, "scat_gain":3 },
+    { "type":"circle", "center_xy":[ 120, 120 ], "radius":25, "scat_gain":0 },
+    { "type":"circle", "center_xy":[ 200, 200 ], "radius":25, "scat_gain":0 },
+    { "type":"points", "coordinates_xy":[ [200, 200] ], "scat_gain":2 },
+    { "type":"circle", "center_xy":[ 250, 200 ], "radius":25, "scat_gain":0 }
   ]
  } 
