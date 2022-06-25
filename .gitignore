@@ -1,11 +1,9 @@
 *.svg
 *.raw
-*.png
 *.jar
 *.exe
 *.dat
 *.csv
-*.mat
 
 **/.vscode/
 
