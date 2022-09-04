@@ -1,0 +1,6 @@
+{
+  "distribution":"rayleigh",
+  "perc_of_scatterers":60,
+  "phantom_format":"effec_scatterers",
+  "image_path":"examples/dicom_example.dcm"
+ }
