@@ -13,6 +13,7 @@ import scipy.io
 from . import structures as struc
 import utils as ut
 from PIL import Image
+import pydicom as dicom
 
 
 class Phantom():
@@ -37,7 +38,11 @@ class Phantom():
         input_image = config["image_path"]
 
         ## 2-D array that will store the scatterers amplitude
-        self.phantom = np.transpose(np.array(Image.open(input_image).convert('L'), dtype=np.complex_))
+        if input_image.lower().endswith('.dcm'):
+            self.phantom = dicom.dcmread(input_image).pixel_array
+            self.phantom = np.transpose(self.phantom.astype(complex))
+        else:
+            self.phantom = np.transpose(np.array(Image.open(input_image).convert('L'), dtype=np.complex_))
 
         ## Number of rows in the phantom
         self.num_of_rows = self.phantom.shape[1]
@@ -74,7 +79,7 @@ class Phantom():
 
         # Use config.distribution and config.perc_of_scatterers to generate a phantom with the desired distribution
         # Iterate through structures and fill the desired areas
-        
+
         self.dist = config["distribution"].lower()
         self.dens = config["perc_of_scatterers"]
         self.num_of_rows = config["rows_y"]
@@ -90,7 +95,7 @@ class Phantom():
         self.density_map = [[self.rho0 for y in range(self.num_of_rows)] for x in range(self.num_of_cols)]
 
         self.generate_scatterers(config)
- 
+
         for region in config["structures"]:
             region_type = region["type"].lower()
             ut.log_message("Adding " + region_type)
@@ -153,7 +158,7 @@ class Phantom():
         x = x/max_x
         max_x = np.amax(abs(x))
         x = (np.around((self.num_of_cols - 1)*(x/max_x))).astype(int)
-        
+
         y = y - np.amin(y)
         max_y = np.amax(abs(y))
         y = y/max_y

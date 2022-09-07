@@ -15,6 +15,7 @@ The application was developed with Python 3.9.4 and tested with the following ve
 * numpy 1.20.3
 * pyvista 0.33.2
 * psutil 5.8.0
+* pydicom 2.3.0
 
 They can be installed with `pip install -r requirements.txt`, but a version is not specified. It is possible that the modules have dependencies incompatibilities in more recent versions of Python (e.g 3.10).
 
@@ -70,6 +71,17 @@ Alternatively, an image can be used as input, but only for effective scatterers 
     "perc_of_scatterers":60,
     "phantom_format":"effec_scatterers",
     "image_path":"../input_image.bmp"
+    }
+```
+
+The image can also be in DICOM format. For this, it is only necessary to specify a file with .dcm extension. Example:
+
+```json
+    {
+    "distribution":"rayleigh",
+    "perc_of_scatterers":60,
+    "phantom_format":"effec_scatterers",
+    "image_path":"../input_image.dcm"
     }
 ```
 
