@@ -27,7 +27,7 @@ Doxygen and Graphviz are used for documentation. AsciiDoc is used for the softwa
 
 ### Generating a phantom
 
-Usage: `generate_phantom.py [-h] -c CONFIG -f FORMAT [-o OUTPUT_NAME] [-v VERBOSITY]`
+Usage: `generate_phantom.py [-h] -c CONFIG -f FORMAT -o OUTPUT_NAME [-v VERBOSITY]`
 
 Optional arguments:
 
@@ -39,9 +39,9 @@ Required named arguments:
 
   **-f FORMAT, --format FORMAT** Define in which format the phantom will be saved. Any combination of the following three options are possible: t - save in a text file; m - save in a .mat file; p - save a png image
 
-Optional arguments:
+  **-o OUTPUT_NAME, --output_name OUTPUT_NAME** Name of the output files (txt, mat and png). If a directory is used as input, this will be the subdirectory name
 
-  **-o OUTPUT_NAME, --output_name OUTPUT_NAME** Name of the output files (txt, mat and png). The files will be saved in the same directory where the configuration file is located. The configuration file name is used if the output name is not informed
+Optional arguments:
 
   **-v VERBOSITY, --verbosity VERBOSITY** Enables verbose output. Values: 'on' and 'off' (without quotes)
 

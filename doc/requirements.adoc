@@ -48,6 +48,30 @@ v0.1, 2022-02-07
 
 *Acceptance criteria*: All defined structures can be added according to the configuration file
 
+==== Req 2.2 - Input from image file
+
+*Description*: It SHALL be possible to use an image file as input for 2-D phantom generation
+
+*Rationale*: This allows having a predefined structure and using the file to generate the phantom
+
+*Acceptance criteria*: Using an image file as input, the phantom is generated with the structures contained in the image
+
+==== Req 2.2.1 - DICOM files as input
+
+*Description*: It SHALL be possible to use a 2-D DICOM file as input for 2-D phantom generation
+
+*Rationale*: This allows using an image of a different modality to generate the phantom
+
+*Acceptance criteria*: Using a DICOM file as input, the phantom is generated with the structures contained in the image
+
+==== Req 2.2.2 - Multiple files in a directory
+
+*Description*: It SHALL be possible to specify a directory containing image files, including DICOM files, as input for 2-D phantom generation
+
+*Rationale*: This allows generating multiple phantoms without external scripting or having to execute the application multiple times
+
+*Acceptance criteria*: Multiple 2-D phantoms are generated when using a directory with multiple image files in it
+
 ---
 
 === Req 3 - Output format

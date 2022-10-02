@@ -66,7 +66,7 @@ def validate_distribution(distribution):
         error_msg = error_msg + "Supported distributions are:"
         for dist in supported_distributions:
             error_msg = error_msg + " " + dist
-        
+
         error_msg = error_msg + ".\r\n"
 
     return error_msg
@@ -230,7 +230,7 @@ def validate_configuration(configuration):
     else:
         input_image = Path(image_path)
 
-        if not input_image.is_file():
+        if not input_image.is_file() and not input_image.is_dir():
             raise Exception("Input image \"" + image_path + "\" was not found.")
 
         if (phantom_format != "effec_scatterers"):
