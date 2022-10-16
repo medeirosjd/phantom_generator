@@ -21,11 +21,12 @@ class Phantom():
     \brief The 2-D phantom. 3-D phantoms are built with one 2-D phantom per slice
     """
 
-    def generate_phantom_from_image(self, config):
+    def generate_phantom_from_image(self, config, input_image):
         """!
         \brief Generates the scatterers of a phantom created from an image
 
         \param config The parsed configuration
+        \param input_image The image file used as reference to generate the phantom
         """
 
         ## Statistical distribution of the scatterers in the phantom
@@ -33,9 +34,6 @@ class Phantom():
 
         ## Percentage of scatterers in the phantom
         self.dens = config["perc_of_scatterers"]
-
-        # Load gray-scale image and get x_cols and rows_y
-        input_image = config["image_path"]
 
         ## 2-D array that will store the scatterers amplitude
         if input_image.lower().endswith('.dcm'):
