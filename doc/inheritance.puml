@@ -12,6 +12,9 @@ class Sphere #fff {
 class Circle #fff {
 }
 
+class Ellipse #fff {
+}
+
 class Polygon #fff {
 }
 
@@ -24,6 +27,7 @@ class SinglePoint #fff {
 Structure3d <|-- Sphere
 Structure <|-- Sphere
 Structure <|-- Circle
+Structure <|-- Ellipse
 Structure <|-- Polygon
 Structure <|-- Rectangle
 Structure <|-- SinglePoint

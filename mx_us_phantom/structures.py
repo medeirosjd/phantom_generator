@@ -6,7 +6,7 @@
 
 from numpy import mod
 import utils as ut
-
+import math
 
 # https://github.com/JoJocoder/PNPOLY/blob/master/pnpoly.py
 # Originally from https://wrf.ecse.rpi.edu/Research/Short_Notes/pnpoly.html
@@ -89,7 +89,7 @@ class Structure():
 
         # x: cols, y:rows
         for point in self.origins:
-            if ((point.x < 0 or point.x > num_of_cols - 1) or 
+            if ((point.x < 0 or point.x > num_of_cols - 1) or
                (point.y < 0 or point.y > num_of_rows - 1)):
                 return "The defined points are out of bounds of the phantom.\r\n"
 
@@ -195,10 +195,99 @@ class Circle(Structure):
         top_y = self.center.y - self.radius
 
         for x in range(top_x, top_x + 2*self.radius):
-            if mod(x, 10) == 0:
-                ut.log_message("Filling column " + str(x) + ". Range from " + str(top_x) + " to " + str(top_x + 2*self.radius), config.get("verbose", False))
             for y in range(top_y, top_y + 2*self.radius):
                 if pow((x - self.center.x), 2) + pow((y - self.center.y), 2) <= pow(self.radius, 2):
+                    self.fill_structure(phantom, x, y, scat_gain, sound_speed_map, density_map, config)
+
+
+class Ellipse(Structure):
+    """!
+    \brief Defines an ellipse inside a phantom
+    """
+
+    def __init__(self, origins, *args):
+        """
+        \brief Initializes an ellipse using the following inputs:
+
+        \param origins One point defining the center of the ellipse (x, y)
+        \param args Semi-axes of the ellipse (x: arg[0], y:arg[1]) and the rotation angle relative to x semi-axis (arg[2])
+        """
+
+        ## Center (point) of the ellipse
+        self.center = origins[0]
+
+        ## Semi-axes of the ellipse and the rotation angle relative to x semi-axis
+        self.semi_axis_x = args[0]
+        self.semi_axis_y = args[1]
+        self.rotation_angle_deg = args[2]
+
+        major_length = max(self.semi_axis_x, self.semi_axis_y)
+
+        self.min_x = self.center.x + major_length
+        self.max_x = self.center.x - major_length
+        self.min_y = self.center.y + major_length
+        self.max_y = self.center.y - major_length
+
+        for x in range(self.center.x - major_length, self.center.x + major_length):
+            for y in range(self.center.y - major_length, self.center.y + major_length):
+                if self.is_point_in_ellipse(x, y):
+                    self.min_x = min(self.min_x, x)
+                    self.min_y = min(self.min_y, y)
+                    self.max_x = max(self.max_x, x)
+                    self.max_y = max(self.max_y, y)
+
+    def is_point_in_ellipse(self, x, y):
+        """!
+        \brief Checks if a given point (x, y) is part of an ellipse (inside or in the line)
+
+        \param x Point coordinate in the x (columns) direction
+        \param y Point coordinate in the y (rows) direction
+
+        \return True in case the point in part of the ellipse area
+        """
+        h = self.center.x
+        k = self.center.y
+        a = self.semi_axis_x
+        b = self.semi_axis_y
+        ang_sin = math.sin(math.radians(self.rotation_angle_deg))
+        ang_cos = math.cos(math.radians(self.rotation_angle_deg))
+
+        # Equation taken from https://math.stackexchange.com/questions/426150/what-is-the-general-equation-of-the-ellipse-that-is-not-in-the-origin-and-rotate
+        return ((((x - h)*ang_cos + (y - k)*ang_sin) ** 2)/(a ** 2)+(((x - h)*ang_sin - (y - k)*ang_cos) ** 2)/(b ** 2) <= 1)
+
+    def validate(self, num_of_rows, num_of_cols):
+        """!
+        \brief Validates the ellipse configuration
+
+        \param num_of_rows Number of rows in the phantom
+        \param num_of_cols Number of columns in the phantom
+
+        \return An empty string if the ellipse configuration is valid; an error string otherwise
+        """
+
+        if (self.semi_axis_x <= 0) or (self.semi_axis_y <= 0):
+            return "Ellipse axes must be greater than zero"
+        elif ((self.max_y > num_of_rows - 1) or (self.max_x > num_of_cols - 1) or
+           (self.min_x < 0) or (self.min_y < 0)):
+            return "The defined ellipse is out of bounds of the phantom.\r\n"
+        else:
+            return ""
+
+    def fill_area(self, phantom, sound_speed_map, density_map, scat_gain, config):
+        """!
+        \brief Fills an ellipse
+
+        \param phantom The 2-D array where the scatterers amplitude will be stored
+        \param sound_speed_map The 2-D array where the sound values will be stored
+        \param density_map The 2-D array where the density values will be stored
+        \param scat_gain The gain of the scatterers inside the sphere
+        \param config The parsed configuration
+        """
+
+        # Create a rectangle and, inside it, search for points that are inside the ellipse
+        for x in range(self.min_x, self.max_x):
+            for y in range(self.min_y, self.max_y):
+                if self.is_point_in_ellipse(x, y):
                     self.fill_structure(phantom, x, y, scat_gain, sound_speed_map, density_map, config)
 
 
@@ -236,7 +325,7 @@ class Rectangle(Structure):
 
         if (self.horizontal_length <= 0 or self.vertical_length <= 0):
             return "Rectangle dimensions must be greater than zero"
-        elif ((self.top_left_corner.y + self.vertical_length > num_of_rows - 1) or 
+        elif ((self.top_left_corner.y + self.vertical_length > num_of_rows - 1) or
            (self.top_left_corner.x + self.horizontal_length > num_of_cols - 1) or
            (self.top_left_corner.x < 0) or (self.top_left_corner.y < 0)):
            return "The defined rectangle is out of bounds of the phantom.\r\n"
@@ -297,7 +386,7 @@ class Polygon(Structure):
                 ut.log_message("Filling column " + str(x) + ". Range from " + str(min_x) + " to " + str(max_x), config.get("verbose", False))
             for y in range(min_y, max_y):
                 point = Point((x, y))
-                if point.in_polygon(self.origins): 
+                if point.in_polygon(self.origins):
                     # Point is inside the polygon
                     self.fill_structure(phantom, point.x, point.y, scat_gain, sound_speed_map, density_map, config)
 
@@ -355,7 +444,7 @@ class Structure3d(object):
 
         # x: cols, y:rows, z:depth
         for point in self.origins:
-            if ((point.x < 0 or point.x > num_of_cols - 1) or 
+            if ((point.x < 0 or point.x > num_of_cols - 1) or
                (point.y < 0 or point.y > num_of_rows - 1)  or
                (point.z < 0 or point.z > num_of_z - 1)):
                 return "The defined points are out of bounds of the phantom.\r\n"

@@ -148,7 +148,7 @@ def validate_structures(structures, num_of_rows, num_of_cols, num_of_z):
 
     error_msg = ""
 
-    supported_structures = ["circle", "rectangle", "free_polygon", "points", "sphere"]
+    supported_structures = ["circle", "ellipse", "rectangle", "free_polygon", "points", "sphere"]
 
     for region in structures:
         region_type = region["type"].lower()
@@ -162,6 +162,9 @@ def validate_structures(structures, num_of_rows, num_of_cols, num_of_z):
             if region_type == "circle":
                 circ = struc.Circle([struc.Point(region["center_xy"])], region["radius"])
                 error_msg = error_msg + circ.validate(num_of_rows, num_of_cols)
+            elif region_type == "ellipse":
+                ell = struc.Ellipse([struc.Point(region["center_xy"])], region["semi_axis_x"], region["semi_axis_y"], region["rotation_angle_deg"])
+                error_msg = error_msg + ell.validate(num_of_rows, num_of_cols)
             elif region_type == "rectangle":
                 rec = struc.Rectangle([struc.Point((region["top_left_corner_xy"]))], region["length_x"], region["length_y"])
                 error_msg = error_msg + rec.validate(num_of_rows, num_of_cols)

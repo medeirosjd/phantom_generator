@@ -100,6 +100,7 @@ If phantom format is set to "k_wave" the following attributes need to be set as 
 Structures supported for 2-D and 3-D phantoms. Note: for 3-D phantoms, these structures are replicated in every slice.
 
 * Circle
+* Ellipse
 * Polygon
 * Single point
 * Rectangle
