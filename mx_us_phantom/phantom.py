@@ -100,6 +100,9 @@ class Phantom():
             if region_type == "circle":
                 circ = struc.Circle([struc.Point(region["center_xy"])], region["radius"])
                 circ.fill_area(self.phantom, self.sound_speed_map, self.density_map, region["scat_gain"], config)
+            elif region_type == "ellipse":
+                ell = struc.Ellipse([struc.Point(region["center_xy"])], region["semi_axis_x"], region["semi_axis_y"], region["rotation_angle_deg"])
+                ell.fill_area(self.phantom, self.sound_speed_map, self.density_map, region["scat_gain"], config)
             elif region_type == "sphere":
                 sphere = struc.Sphere([struc.Point(region["center_xyz"])], region["radius"])
                 sphere.fill_volume(self.phantom, slice_z, self.sound_speed_map, self.density_map, region["scat_gain"], config)
