@@ -1,0 +1,19 @@
+{
+  "rows_y":2000,
+  "cols_x":2000,
+  "distribution":"uniform",
+  "perc_of_scatterers":30,
+  "phantom_format":"effec_scatterers",
+  "structures": [
+    { "type":"ellipse", "center_xy":[ 1000, 1000 ], "semi_axis_x":690, "semi_axis_y":920, "rotation_angle_deg":0, "scat_gain":255 },
+    { "type":"ellipse", "center_xy":[ 1220, 1000 ], "semi_axis_x":110, "semi_axis_y":310, "rotation_angle_deg":18, "scat_gain":0.15 },
+    { "type":"ellipse", "center_xy":[ 780, 1000 ], "semi_axis_x":160, "semi_axis_y":410, "rotation_angle_deg":-18, "scat_gain":0.15 },
+    { "type":"ellipse", "center_xy":[ 1000, 650 ], "semi_axis_x":210, "semi_axis_y":250, "rotation_angle_deg":0, "scat_gain":0.3 },
+    { "type":"ellipse", "center_xy":[ 1000, 900 ], "semi_axis_x":46, "semi_axis_y":46, "rotation_angle_deg":0, "scat_gain":0.3 },
+    { "type":"ellipse", "center_xy":[ 1000, 1100 ], "semi_axis_x":46, "semi_axis_y":46, "rotation_angle_deg":0, "scat_gain":0.3 },
+    { "type":"ellipse", "center_xy":[ 920, 1605 ], "semi_axis_x":46, "semi_axis_y":23, "rotation_angle_deg":0, "scat_gain":0.3 },
+    { "type":"ellipse", "center_xy":[ 1000, 1605 ], "semi_axis_x":23, "semi_axis_y":23, "rotation_angle_deg":0, "scat_gain":0.3 },
+    { "type":"ellipse", "center_xy":[ 1060, 1605 ], "semi_axis_x":23, "semi_axis_y":46, "rotation_angle_deg":0, "scat_gain":0.3 },
+    { "type":"ellipse", "center_xy":[ 1000, 1018 ], "semi_axis_x":662, "semi_axis_y":874, "rotation_angle_deg":0, "scat_gain":0.6 }
+  ]
+ }
