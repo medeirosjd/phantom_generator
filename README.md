@@ -45,6 +45,14 @@ Optional arguments:
 
   **-v VERBOSITY, --verbosity VERBOSITY** Enables verbose output. Values: 'on' and 'off' (without quotes)
 
+Example:
+
+```
+python generate_phantom.py -c examples/example_shepp_logan.json -f p -o example_shepp_logan_phantom
+```
+
+<img src="examples/example_shepp_logan_phantom.png" width="512">
+
 Example of json configuration file. The 'examples' folder contains json samples for all supported formats. Note that the attributes below are mandatory:
 
 ```json
@@ -130,6 +138,15 @@ Required named arguments:
 Optional arguments:
 
   **-m COLOR_MODE, --color_mode COLOR_MODE** Options are 'light' and 'dark', without quotes
+
+Example:
+
+```
+python plot_3d_phantom.py -a phantom -f examples/example_3d.mat -m light
+```
+
+<img src="examples/example_3d_phantom.svg" width="768">
+
 
 ## Software requirements
 
