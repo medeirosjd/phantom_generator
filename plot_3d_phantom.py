@@ -69,11 +69,11 @@ def plot_and_save(args):
 
     pl = pv.Plotter()
     if color_mode == 'dark':
-        pl.show_bounds(location='outer', color=[1, 1, 1])
-        pl.set_background(color=[0, 0, 0])
+        pl.show_bounds(location='outer', color=[1.0, 1.0, 1.0])
+        pl.set_background('black')
     else:
-        pl.show_bounds(location='outer', color=[0, 0, 0])
-        pl.set_background(color=[1, 1, 1])
+        pl.show_bounds(location='outer', color=[0.0, 0.0, 0.0])
+        pl.set_background('white')
 
     pl.add_volume(data_v, cmap='viridis')
     pl.add_bounding_box()
